@@ -1,3 +1,3 @@
-import { server } from "./server/Server";
+import { server } from './server/Server';
 
-server.listen(9090, () => console.log("App rodando na porta 9090!"));
+server.listen(9090, () => console.log('App rodando na porta 9090!'));
