@@ -1,3 +1,3 @@
 import { server } from './server/Server';
 
-server.listen(9090, () => console.log('App rodando na porta 9090!'));
+server.listen(process.env.PORT || 8080, () => console.log(`App rodando na porta ${process.env.PORT || 8080}`));
