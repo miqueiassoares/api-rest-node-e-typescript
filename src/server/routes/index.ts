@@ -1,15 +1,16 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { CidadesController } from './../controllers';
 
 const router = Router();
 
 router.get('/', (_, res) => {
-  return res.status(StatusCodes.ACCEPTED).send('Olá, DEV!');
+  return res.status(StatusCodes.ACCEPTED).send('funcionando!');
 });
 
-router.post('/teste/:token', (req, res) => {
-  console.log(req.params.token);
-  return res.send('teste post');
-});
+router.post('/cidades',  
+  CidadesController.createValidation, 
+  CidadesController.create
+);
 
 export { router };
