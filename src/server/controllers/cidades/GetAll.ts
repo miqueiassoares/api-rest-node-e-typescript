@@ -19,9 +19,15 @@ export const getAllValidation = validation((getSchema) => (
   }
 ));
 
-export const getAll = async (req: Request<{}, {}, ICidade>, res: Response) => {
-  console.log(req.body);
-  console.log(req.query);
+export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Response) => {
+  res.setHeader('access-control-expose-headers', 'x-total-count');
+  res.setHeader('x-total-count', 1);
+
+  return res.status(StatusCodes.OK).json([
+    {
+      id: 1, 
+      nome: 'Caetité',
+    }
+  ]);
   
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado!');
 };
