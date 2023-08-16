@@ -2,15 +2,14 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
 import { validation } from '../../shared/middleware';
+import { ICidade } from '../../database/models';
+
 
 interface IParamProps {
   id?: number
 }
 
-interface IBodyProps {
-  nome: string
-}
-
+interface IBodyProps extends Omit<ICidade, 'id'> {}
 
 export const updateByIdValidation = validation((getSchema) => (
   {

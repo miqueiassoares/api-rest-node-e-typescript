@@ -9,6 +9,6 @@ export const CidadesController = {
   ...getAll,
   ...getById,
   ...updateById,
-  ...deleteById  
+  ...deleteById
 };
 
