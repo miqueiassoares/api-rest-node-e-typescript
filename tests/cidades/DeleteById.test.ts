@@ -13,7 +13,7 @@ describe('Cidades - Delete', () => {
       .delete(`/cidades/${criaRegistro.body}`)
       .send();
     
-    expect(apagarRegistro.statusCode).toEqual(StatusCodes.NOT_FOUND);
+    expect(apagarRegistro.statusCode).toEqual(StatusCodes.NO_CONTENT);
   });
   it('Tenta apagar um registro que não existe', async () => {
     const res1 = await testServer.delete('/cidades/99999');

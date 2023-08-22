@@ -1,12 +1,12 @@
 import { Knex } from 'knex';
-import { ETablesNames } from '../seeds/ETablesNames';
+import { ETablesNames } from '../ETablesNames';
 
 export async function up(knex: Knex) {
   return knex
     .schema
     .createTable(ETablesNames.cidade, table => {
       table.bigIncrements('id').primary().index();
-      table.string('nome', 150).index().notNullable();
+      table.string('nome', 150).checkLength('<=', 150).index().notNullable();
       table.comment('Tabela usada para armazenar cidades no sistema.');
     })
     .then(() => {
