@@ -7,9 +7,9 @@
   "private": false,
   "scripts": {
     "dev": "nodemon --watch src/ --exec ts-node src/index.ts -e ts",
-    "go": "ts-node-dev ./src/index.ts",
+    "production": "node ./build/index.js",
     "test": "jest",
-    "build": "tsc",
+    "postinstall": "tsc",
     "knex:rollback": "knex --knexfile ./src/server/database/knex/Enviroment.ts migrate:rollback",
     "knex:rollback-all": "knex --knexfile ./src/server/database/knex/Enviroment.ts migrate:rollback --all",
     "knex:migrate": "knex --knexfile ./src/server/database/knex/Enviroment.ts migrate:latest",
