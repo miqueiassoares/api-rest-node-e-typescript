@@ -7,7 +7,9 @@ const startSever = () => {
 
 if (process.env.IS_LOCALHOST !== 'true') {
   Knex.migrate.latest().then(() => {
-    startSever();
+    Knex.seed.run()
+      .then(() => startSever())
+      .catch(console.log);
   }).catch(console.log);  
 } else {
   startSever();
