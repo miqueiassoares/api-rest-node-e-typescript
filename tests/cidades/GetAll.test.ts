@@ -15,6 +15,6 @@ describe('Cidades - GetAll', () => {
 
     expect(Number(resBuscada.header['x-total-count'])).toBeGreaterThan(0);
     expect(resBuscada.statusCode).toEqual(StatusCodes.OK);
-    expect(resBuscada.body.length).toBeGreaterThan(0);
+    expect(resBuscada.body.cidades.length).toBeGreaterThan(0);
   });
 });

@@ -20,7 +20,7 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesNames.cidade)
     .then(() => {
-      console.log(`# Create table ${ETablesNames.cidade}`);
+      console.log(`# Dropped table ${ETablesNames.cidade}`);
     });
 }
 
