@@ -5,6 +5,7 @@ describe('Pessoas - Create', () => {
   it('Cria registro', async () => {
     const res1 = await testServer
       .post('/pessoas')
+      .set('Authorization', 'Bearer teste.teste.teste')
       .send({
         nomeCompleto: 'Caetité',
         email: 'miqueiascastros7@gmail.com',
@@ -18,6 +19,7 @@ describe('Pessoas - Create', () => {
   it('Tenta criar um registro sem a propriedade cidadeId', async () => {
     const res1 = await testServer
       .post('/pessoas')
+      .set('Authorization', 'Bearer teste.teste.teste')
       .send({
         nomeCompleto: 'Caetité',
         email: 'miqueiascastros7@gmail.com'

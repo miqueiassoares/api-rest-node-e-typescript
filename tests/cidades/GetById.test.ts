@@ -5,12 +5,14 @@ describe('Cidades - GetById', () => {
   it('Busca registro por id', async () => {
     const res1 = await testServer
       .post('/cidades')
+      .set('Authorization', 'Bearer teste.teste.teste')
       .send({nome: 'Caetité'});
     
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
     const resBuscada = await testServer
       .get(`/cidades/${res1.body}`)
+      .set('Authorization', 'Bearer teste.teste.teste')
       .send();
 
     expect(resBuscada.statusCode).toEqual(StatusCodes.OK);
@@ -19,6 +21,7 @@ describe('Cidades - GetById', () => {
   it('Tenta buscar registro que não existe', async () => {
     const res1 = await testServer
       .get('/cidades/99999')
+      .set('Authorization', 'Bearer teste.teste.teste')
       .send();
     
     expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
