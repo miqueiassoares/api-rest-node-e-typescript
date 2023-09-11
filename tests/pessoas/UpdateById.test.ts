@@ -1,12 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
-import { testServer } from '../jest.setup';
+import { accessToken, testServer } from '../jest.setup';
 
 describe('Pessoas - UpdateById', () => {
 
   it('Atualiza registro', async () => {
     const res1 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Caetité',
         email: 'miqueiascastros7@gmail.com',
@@ -17,7 +17,7 @@ describe('Pessoas - UpdateById', () => {
 
     const atualizaRegistro = await testServer
       .put(`/pessoas/${res1.body}`)
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Guanambi',
         email: 'miqueiascastros7@gmail.com',
@@ -28,7 +28,7 @@ describe('Pessoas - UpdateById', () => {
 
     const getRes1 = await testServer
       .get(`/pessoas/${res1.body}`)
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send();
     
     expect(getRes1.statusCode).toEqual(StatusCodes.OK);
@@ -44,7 +44,7 @@ describe('Pessoas - UpdateById', () => {
   it('Tenta atualizar registro que não existe', async () => {
     const res1 = await testServer
       .put('/pessoas/99999')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Caetité',
         email: 'miqueaiscastros7@gmail.com',

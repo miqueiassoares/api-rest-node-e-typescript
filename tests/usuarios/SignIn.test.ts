@@ -1,10 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
-import { testServer } from '../jest.setup';
+import { accessToken, testServer } from '../jest.setup';
 
 describe('Usuário - SignIn', () => {
   beforeAll(async () => {
     await testServer.post('/cadastrar')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         senha: '1234567',
         email: 'jorge@gmail.com',
@@ -15,7 +15,7 @@ describe('Usuário - SignIn', () => {
   it('Faz login', async () => {
     const res1 = await testServer
       .post('/entrar')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         senha: '1234567',
         email: 'jorge@gmail.com'
@@ -26,7 +26,7 @@ describe('Usuário - SignIn', () => {
   it('Senha incorreta', async () => {
     const res1 = await testServer
       .post('/entrar')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         senha: '12224455',
         email: 'jorge@gmail.com'

@@ -1,11 +1,11 @@
 import { StatusCodes } from 'http-status-codes';
-import { testServer } from '../jest.setup';
+import { accessToken, testServer } from '../jest.setup';
 
 describe('Pessoas - GetAll', () => {
   it('Buscar todos os registros', async () => {
     const res1 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Caetité',
         email: 'miqueiascastros7@gmail.com',
@@ -13,7 +13,7 @@ describe('Pessoas - GetAll', () => {
       });
     const res2 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Guanambi',
         email: 'vitoria@gmail.com',
@@ -25,7 +25,7 @@ describe('Pessoas - GetAll', () => {
 
     const resBuscada = await testServer
       .get('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send();
 
     expect(Number(resBuscada.header['x-total-count'])).toBeGreaterThan(0);
@@ -37,7 +37,7 @@ describe('Pessoas - GetAll', () => {
   it('Limite de pessoas aplicado', async () => {
     const res1 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Caetité',
         email: 'mateusddd@gmail.com',
@@ -45,7 +45,7 @@ describe('Pessoas - GetAll', () => {
       });
     const res2 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Guanambi',
         email: 'anabeatriz@gmail.com',
@@ -53,7 +53,7 @@ describe('Pessoas - GetAll', () => {
       });
     const res3 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Salvador',
         email: 'vitoriarodriguez@gmail.com',
@@ -66,7 +66,7 @@ describe('Pessoas - GetAll', () => {
 
     const resBuscada = await testServer
       .get('/pessoas?limit=1')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send();
     
     expect(Number(resBuscada.header['x-total-count'])).toBe(5);

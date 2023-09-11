@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { JWTService } from '../services';
 
 export const ensureAuthenticated: RequestHandler = async (req, res, next) => {
   const { authorization } = req.headers;
@@ -14,8 +15,6 @@ export const ensureAuthenticated: RequestHandler = async (req, res, next) => {
 
   const [type, token] = authorization.split(' ');
 
-  console.log(token);
-
   if(type !== 'Bearer') {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       errors: {
@@ -23,17 +22,22 @@ export const ensureAuthenticated: RequestHandler = async (req, res, next) => {
       }
     });
   }
+  
+  const jwtData = JWTService.verify(token);
 
-  if(token !== 'teste.teste.teste') {
-    return res.status(StatusCodes.UNAUTHORIZED).json({
+  if(jwtData === 'JWT_SECRET_NOT_FOUND') {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
-        default: 'Não autenticado'
+        default: 'Erro ao verificar o token'
       }
+    });
+  } else if (jwtData === 'INVALID_TOKEN') {
+    return res.status(StatusCodes.UNAUTHORIZED).json({
+      errors: {default: 'Não autenticado'}
     });
   }
 
-  console.log('passou por aqui');
-  
+  req.headers.idUsuario = jwtData.uid.toString();
 
   return next();
 };

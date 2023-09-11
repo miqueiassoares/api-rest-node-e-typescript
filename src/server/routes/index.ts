@@ -67,8 +67,7 @@ router.delete('/pessoas/:id',
 
 // usuarios
 
-router.post('/entrar', 
-  ensureAuthenticated,  
+router.post('/entrar',
   UsuariosController.signInValidation, 
   UsuariosController.signIn
 );

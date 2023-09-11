@@ -1,11 +1,11 @@
 import { StatusCodes } from 'http-status-codes';
-import { testServer } from '../jest.setup';
+import { accessToken, testServer } from '../jest.setup';
 
 describe('Pessoas - Create', () => {
   it('Cria registro', async () => {
     const res1 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
         nomeCompleto: 'Caetité',
         email: 'miqueiascastros7@gmail.com',
@@ -19,9 +19,9 @@ describe('Pessoas - Create', () => {
   it('Tenta criar um registro sem a propriedade cidadeId', async () => {
     const res1 = await testServer
       .post('/pessoas')
-      .set('Authorization', 'Bearer teste.teste.teste')
+      .set({ Authorization: `Bearer ${accessToken}` })
       .send({
-        nomeCompleto: 'Caetité',
+        nomeCompleto: 'Miquéias Castro',
         email: 'miqueiascastros7@gmail.com'
       });
     
