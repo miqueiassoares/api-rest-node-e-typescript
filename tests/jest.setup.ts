@@ -20,4 +20,4 @@ afterAll(async () => {
 });
 
 export const testServer = supertest(server);
-export { accessToken};
+export { accessToken };
