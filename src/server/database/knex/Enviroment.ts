@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import path from 'path';
+import 'dotenv';
 
 export const development: Knex.Config = {
   client: 'sqlite3',
